@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/canvas-component-generator/static/css/main.aae4a339.css",
-    "main.js": "/canvas-component-generator/static/js/main.843b3416.js",
+    "main.js": "/canvas-component-generator/static/js/main.91fb4200.js",
     "index.html": "/canvas-component-generator/index.html",
     "main.aae4a339.css.map": "/canvas-component-generator/static/css/main.aae4a339.css.map",
-    "main.843b3416.js.map": "/canvas-component-generator/static/js/main.843b3416.js.map"
+    "main.91fb4200.js.map": "/canvas-component-generator/static/js/main.91fb4200.js.map"
   },
   "entrypoints": [
     "static/css/main.aae4a339.css",
-    "static/js/main.843b3416.js"
+    "static/js/main.91fb4200.js"
   ]
 }
