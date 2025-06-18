@@ -548,24 +548,24 @@ const generateBadgesHtml = (props) => {
 // --- React App Component ---
 
 // --- Memoized & Debounced Form Controls ---
-const InputControl = React.memo(({ l, pK, t = 'text', initialValue, onPropChange }) => {
+const DebouncedInputControl = React.memo(({ l, pK, t = 'text', initialValue, onPropChange }) => {
     const [value, setValue] = useState(initialValue);
-    const debouncedOnPropChange = useCallback(onPropChange, []);
+    const onPropChangeStable = useCallback(onPropChange, []);
 
+    // Effect to update global state after user stops typing
     useEffect(() => {
         const handler = setTimeout(() => {
-            if (value !== initialValue) {
-                debouncedOnPropChange(pK, value);
+             if (value !== initialValue) {
+                onPropChangeStable(pK, value);
             }
-        }, 250);
+        }, 300); // 300ms delay
 
         return () => clearTimeout(handler);
-    }, [value, pK, debouncedOnPropChange, initialValue]);
+    }, [value, pK, onPropChangeStable, initialValue]);
 
+    // Effect to sync local state if the prop changes from parent
     useEffect(() => {
-        if (initialValue !== value) {
-            setValue(initialValue);
-        }
+        setValue(initialValue);
     }, [initialValue]);
 
     return (
@@ -581,24 +581,22 @@ const InputControl = React.memo(({ l, pK, t = 'text', initialValue, onPropChange
     );
 });
 
-const TextareaControl = React.memo(({ l, pK, initialValue, onPropChange }) => {
+const DebouncedTextareaControl = React.memo(({ l, pK, initialValue, onPropChange }) => {
     const [value, setValue] = useState(initialValue);
-    const debouncedOnPropChange = useCallback(onPropChange, []);
+    const onPropChangeStable = useCallback(onPropChange, []);
 
     useEffect(() => {
         const handler = setTimeout(() => {
             if (value !== initialValue) {
-                debouncedOnPropChange(pK, value);
+                onPropChangeStable(pK, value);
             }
-        }, 250);
-
+        }, 300);
+        
         return () => clearTimeout(handler);
-    }, [value, pK, debouncedOnPropChange, initialValue]);
+    }, [value, pK, onPropChangeStable, initialValue]);
     
     useEffect(() => {
-        if (initialValue !== value) {
-            setValue(initialValue);
-        }
+        setValue(initialValue);
     }, [initialValue]);
 
     return (
@@ -782,13 +780,12 @@ function App() {
     NavBar: generateNavBarHtml, Pagination: generatePaginationHtml, Progress: generateProgressHtml,
   };
 
-  const handlePropChange = useCallback((key, value) => {
+  const handlePropChange = useCallback((componentName, key, value) => {
     setComponentProps(prevProps => ({
       ...prevProps,
-      [selectedComponent]: { ...prevProps[selectedComponent], [key]: value }
+      [componentName]: { ...prevProps[componentName], [key]: value }
     }));
-  }, [selectedComponent]);
-
+  }, []);
 
   useEffect(() => {
     if (selectedComponent && htmlGeneratorMap[selectedComponent]) {
@@ -835,15 +832,15 @@ function App() {
     return componentList.map(componentName => {
         const props = componentProps[componentName];
         const hasBorder = 'borderThickness' in props;
+        const onPropChange = (key, value) => handlePropChange(componentName, key, value);
         
-        // Helper functions to render memoized controls
-        const I = (pK, l, t) => <InputControl key={`${componentName}-${pK}`} l={l} pK={pK} t={t} initialValue={props[pK]} onPropChange={handlePropChange} />;
-        const T = (pK, l) => <TextareaControl key={`${componentName}-${pK}`} l={l} pK={pK} initialValue={props[pK]} onPropChange={handlePropChange} />;
-        const C = (pK, l) => <ColorPickerControl key={`${componentName}-${pK}`} l={l} pK={pK} value={props[pK]} onPropChange={handlePropChange} />;
-        const S = (pK, l, opts) => <SelectControl key={`${componentName}-${pK}`} l={l} pK={pK} opts={opts} value={props[pK]} onPropChange={handlePropChange} />;
-        const BT = (pK) => <BorderThicknessControl key={`${componentName}-${pK}`} pK={pK} value={props[pK]} onPropChange={handlePropChange} />;
-        const BR = (pK) => <BorderRadiusControl key={`${componentName}-${pK}`} pK={pK} value={props[pK]} onPropChange={handlePropChange} />;
-        const IL = (itemType, fields) => <ItemListEditor key={`${componentName}-${itemType}`} itemType={itemType} fields={fields} items={props[itemType]} onItemChange={handleItemChange} onAddItem={handleAddItem} onRemoveItem={handleRemoveItem} />;
+        const I = (pK, l, t) => <DebouncedInputControl l={l} pK={pK} t={t} initialValue={props[pK]} onPropChange={onPropChange} />;
+        const T = (pK, l) => <DebouncedTextareaControl l={l} pK={pK} initialValue={props[pK]} onPropChange={onPropChange} />;
+        const C = (pK, l) => <ColorPickerControl l={l} pK={pK} value={props[pK]} onPropChange={onPropChange} />;
+        const S = (pK, l, opts) => <SelectControl l={l} pK={pK} opts={opts} value={props[pK]} onPropChange={onPropChange} />;
+        const BT = (pK) => <BorderThicknessControl pK={pK} value={props[pK]} onPropChange={onPropChange} />;
+        const BR = (pK) => <BorderRadiusControl pK={pK} value={props[pK]} onPropChange={onPropChange} />;
+        const IL = (itemType, fields) => <ItemListEditor itemType={itemType} fields={fields} items={props[itemType]} onItemChange={handleItemChange} onAddItem={handleAddItem} onRemoveItem={handleRemoveItem} />;
 
         let formContent;
         switch (componentName) {
@@ -855,11 +852,11 @@ function App() {
             case 'CardCollection': formContent = <> {C("bgColor", "Fondo de Tarjeta")} {C("titleColor", "Color de Título")} {C("textColor", "Color de Texto")} {C("linkColor", "Color de Enlace")} {C("borderColor", "Color de Borde")} {BT("borderThickness")} {BR("borderRadius")} {IL("cards", { title: 'text', text: 'text', imageSrc: 'text', link: 'text', linkText: 'text' })} </>; break;
             case 'Collapse': formContent = <> {I("title", "Texto del Activador")} {T("content", "Contenido Oculto")} {C("linkColor")} {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
             case 'Dropdowns': formContent = <> {I("title")} {C("bgColor", "Fondo del Botón")} {C("textColor", "Texto del Botón")} {C("contentBgColor", "Fondo del Menú")} {C("contentTextColor", "Texto del Menú")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
-            case 'ListGroup': formContent = <> <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.flush} onChange={e => handlePropChange('flush', e.target.checked)} /><span className="ml-2">Sin bordes (flush)</span></label></div> {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
+            case 'ListGroup': formContent = <> <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.flush} onChange={e => onPropChange('flush', e.target.checked)} /><span className="ml-2">Sin bordes (flush)</span></label></div> {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
             case 'NavBar': formContent = <> {I("brand")} {S("alignment", null, ['left', 'center', 'right'])} {C("bgColor")} {C("textColor", "Color de Marca")} {C("linkColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} {IL("items", { text: 'text', link: 'text' })} </>; break;
             case 'HeroBanners': formContent = <> {I("title")} {T("subtitle")} {I("buttonText")} {I("buttonLink")} {I("imageSrc")} {C("overlayColor")} {I("overlayOpacity", null, "number")} {C("titleColor")} {C("textColor")} {C("buttonBgColor")} {C("buttonTextColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
             case 'Pagination': formContent = <> {I("currentPageIndex", "Índice Página Activa", "number")} {C("bgColor", "Fondo")} {C("textColor", "Texto (Nav)")} {C("linkColor")} {C("activeBgColor", "Fondo Activo")} {C("activeTextColor", "Texto Activo")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("pages", { text: 'text', link: 'text' })} </>; break;
-            case 'Progress': formContent = <> {I("percentage", null, "number")} <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.showText} onChange={e => handlePropChange('showText', e.target.checked)} /><span className="ml-2">Mostrar texto</span></label></div> {C("bgColor", "Color de Barra")} {C("containerBgColor", "Fondo de Contenedor")} {C("textColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
+            case 'Progress': formContent = <> {I("percentage", null, "number")} <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.showText} onChange={e => onPropChange('showText', e.target.checked)} /><span className="ml-2">Mostrar texto</span></label></div> {C("bgColor", "Color de Barra")} {C("containerBgColor", "Fondo de Contenedor")} {C("textColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
             case 'Breadcrumbs': formContent = <> {C("textColor", "Texto (Actual)")} {C("linkColor")} {C("separatorColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} {IL("items", { text: 'text', link: 'text' })} </>; break;
             case 'Badges': formContent = <> {I("text")} {C("bgColor")} {C("textColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
             default: formContent = null;
@@ -871,7 +868,7 @@ function App() {
             </div>
         );
     });
-  }, [componentProps, selectedComponent, handlePropChange, handleItemChange, handleAddItem, handleRemoveItem]);
+  }, [componentList, componentProps, handlePropChange, handleItemChange, handleAddItem, handleRemoveItem]);
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100" style={{ fontFamily: 'Inter, sans-serif' }}>
