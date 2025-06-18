@@ -1,0 +1,26 @@
+# Archivos de dependencias
+# Ver https://docs.npmjs.com/files/npmrc
+node_modules
+.pnp
+.pnp.js
+
+# Archivos de build de producción
+# Normalmente, solo el código fuente se versiona
+build
+
+# Archivos de logs de npm y yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno local
+# Contienen secretos y configuraciones específicas de la máquina
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de configuración de editores y del sistema operativo
+.DS_Store
+.vscode/
+Thumbs.db
