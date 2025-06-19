@@ -87,7 +87,7 @@ const generateAccordionsHtml = (props) => {
 // Alerts
 const generateAlertHtml = (props) => {
   const {
-    message = 'Este es un mensaje de alerta.',
+    message = 'This is an alert message.',
     bgColor = '#3b82f6',
     textColor = '#ffffff',
     borderColor = '#3b82f6',
@@ -121,7 +121,7 @@ const generateAlertHtml = (props) => {
 // Buttons
 const generateButtonHtml = (props) => {
   const {
-    text = 'Botón de Acción',
+    text = 'Action Button',
     link = '#',
     size = 'medium',
     bgColor = '#4f46e5',
@@ -164,7 +164,7 @@ const generateButtonHtml = (props) => {
 // Button Group
 const generateButtonGroupHtml = (props) => {
   const {
-    buttons = [{ text: 'Botón 1', link: '#' }, { text: 'Botón 2', link: '#' }],
+    buttons = [{ text: 'Button 1', link: '#' }, { text: 'Button 2', link: '#' }],
     bgColor = '#4f46e5',
     textColor = '#ffffff',
     borderColor = '#4f46e5',
@@ -219,11 +219,11 @@ const generateButtonGroupHtml = (props) => {
 // Card
 const generateCardHtml = (props) => {
   const {
-    title = 'Título de la Tarjeta',
-    text = 'Contenido de ejemplo para la tarjeta.',
-    imageSrc = 'https://placehold.co/400x200/e0e0e0/000000?text=Imagen',
+    title = 'Card Title',
+    text = 'Sample content for the card.',
+    imageSrc = 'https://placehold.co/400x200/e0e0e0/000000?text=Image',
     link = '#',
-    linkText = 'Leer más',
+    linkText = 'Read More',
     bgColor = '#ffffff',
     titleColor = '#1f2937',
     textColor = '#374151',
@@ -256,7 +256,7 @@ const generateCardHtml = (props) => {
 
   return `
     <div style="${cardStyle}">
-      ${imageSrc ? `<img src="${imageSrc}" alt="Imagen de la tarjeta" style="${imageStyle}">` : ''}
+      ${imageSrc ? `<img src="${imageSrc}" alt="Card image" style="${imageStyle}">` : ''}
       <div style="${bodyStyle}">
         <h3 style="${titleStyle}">${title}</h3>
         <p style="${textStyle}">${text}</p>
@@ -281,8 +281,8 @@ const generateCardCollectionHtml = (props) => {
 // Collapse
 const generateCollapseHtml = (props) => {
   const {
-    title = 'Mostrar/Ocultar Contenido',
-    content = 'Este es el contenido que se colapsa.',
+    title = 'Show/Hide Content',
+    content = 'This is the collapsible content.',
     linkColor = '#3b82f6',
     bgColor = '#f8fafc',
     textColor = '#334155',
@@ -321,7 +321,7 @@ const generateCollapseHtml = (props) => {
 // Dropdowns
 const generateDropdownsHtml = (props) => {
   const {
-    title = 'Menú Desplegable',
+    title = 'Dropdown Menu',
     items = [],
     bgColor = '#4f46e5',
     textColor = '#ffffff',
@@ -419,7 +419,7 @@ const generateListGroupHtml = (props) => {
 // Nav Bar
 const generateNavBarHtml = (props) => {
   const {
-    brand = 'Mi Curso', items = [], alignment = 'left',
+    brand = 'Course Name', items = [], alignment = 'left',
     bgColor = '#1f2937', textColor = '#ffffff', linkColor = '#93c5fd',
     borderThickness = 'none', borderRadius = 'none',
   } = props;
@@ -448,8 +448,8 @@ const generateNavBarHtml = (props) => {
 // Hero Banners
 const generateHeroBannerHtml = (props) => {
   const {
-    title = 'Bienvenido a mi Curso', subtitle = 'Prepárate para aprender y crecer.',
-    buttonText = 'Empezar Aquí', buttonLink = '#',
+    title = 'Welcome to the Course', subtitle = 'Get ready to learn and grow.',
+    buttonText = 'Get Started', buttonLink = '#',
     imageSrc = 'https://placehold.co/1200x400/334155/ffffff?text=Banner',
     overlayColor = '#000000', overlayOpacity = 0.5,
     titleColor = '#ffffff', textColor = '#e5e7eb',
@@ -497,7 +497,7 @@ const generatePaginationHtml = (props) => {
   const nextLink = pages[Math.min(pages.length - 1, currentPageIndex + 1)]?.link || '#';
   const navLinkStyle = `${linkBaseStyle} background-color: ${bgColor}; color: ${textColor};`;
 
-  return `<nav aria-label="Navegación de Páginas" style="margin-bottom: 1rem;"><ul style="${containerStyle}"><li><a href="${prevLink}" style="${navLinkStyle}">&laquo;</a></li>${pageItemsHtml}<li><a href="${nextLink}" style="${navLinkStyle}">&raquo;</a></li></ul></nav>`;
+  return `<nav aria-label="Page navigation" style="margin-bottom: 1rem;"><ul style="${containerStyle}"><li><a href="${prevLink}" style="${navLinkStyle}">&laquo;</a></li>${pageItemsHtml}<li><a href="${nextLink}" style="${navLinkStyle}">&raquo;</a></li></ul></nav>`;
 };
 
 // Progress Bar
@@ -537,7 +537,7 @@ const generateBreadcrumbsHtml = (props) => {
 // Badges
 const generateBadgesHtml = (props) => {
   const {
-    text = 'Nuevo', bgColor = '#22c55e', textColor = '#ffffff',
+    text = 'New', bgColor = '#22c55e', textColor = '#ffffff',
     borderThickness = 'none', borderRadius = 'full',
   } = props;
   const badgeStyle = `display: inline-block; padding: 0.25em 0.6em; font-size: 75%; font-weight: 700; line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: ${borderRadiusMap[borderRadius]}; background-color: ${bgColor}; color: ${textColor}; font-family: Inter, sans-serif; margin-right: 0.5rem; border: ${borderThicknessMap[borderThickness]} solid ${bgColor};`;
@@ -552,20 +552,20 @@ const DebouncedInputControl = React.memo(({ l, pK, t = 'text', initialValue, onP
     const [value, setValue] = useState(initialValue);
     const onPropChangeStable = useCallback(onPropChange, []);
 
-    // Effect to update global state after user stops typing
     useEffect(() => {
         const handler = setTimeout(() => {
              if (value !== initialValue) {
                 onPropChangeStable(pK, value);
             }
-        }, 300); // 300ms delay
+        }, 300);
 
         return () => clearTimeout(handler);
     }, [value, pK, onPropChangeStable, initialValue]);
 
-    // Effect to sync local state if the prop changes from parent
     useEffect(() => {
-        setValue(initialValue);
+        if (initialValue !== value) {
+            setValue(initialValue);
+        }
     }, [initialValue]);
 
     return (
@@ -637,7 +637,7 @@ const SelectControl = React.memo(({ l, pK, opts, value, onPropChange }) => (
 
 const BorderThicknessControl = React.memo(({ pK, value, onPropChange }) => (
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">Grosor del Borde</label>
+      <label className="block text-gray-700 text-sm font-bold mb-2">Border Thickness</label>
       <div className="flex flex-wrap gap-2">
         {Object.keys(borderThicknessMap).map(option => (
           <button key={option} type="button" onClick={() => onPropChange(pK, option)}
@@ -655,7 +655,7 @@ const BorderThicknessControl = React.memo(({ pK, value, onPropChange }) => (
 
 const BorderRadiusControl = React.memo(({ pK, value, onPropChange }) => (
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">Redondeado del Borde</label>
+      <label className="block text-gray-700 text-sm font-bold mb-2">Border Radius</label>
       <div className="flex flex-wrap gap-2">
         {Object.keys(borderRadiusMap).map(option => (
           <button key={option} type="button" onClick={() => onPropChange(pK, option)}
@@ -684,7 +684,7 @@ const ItemListEditor = React.memo(({ itemType, fields, items, onItemChange, onAd
           <button onClick={() => onRemoveItem(itemType, index)} className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white font-bold p-0 w-5 h-5 rounded-full text-xs flex items-center justify-center">&times;</button>
         </div>
       ))}
-      <button onClick={() => onAddItem(itemType)} className="mt-2 bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded-md text-sm">Agregar</button>
+      <button onClick={() => onAddItem(itemType)} className="mt-2 bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded-md text-sm">Add Item</button>
     </div>
   ));
 
@@ -696,57 +696,57 @@ function App() {
   // Initial component properties for each type
   const [componentProps, setComponentProps] = useState({
     Accordion: {
-      accordions: [{ title: 'Acordeón de Ejemplo 1', content: 'Aquí va el contenido detallado.' }, { title: 'Acordeón 2', content: 'Contenido del segundo.' }],
+      accordions: [{ title: 'Sample Accordion 1', content: 'This is the detailed content.' }, { title: 'Accordion 2', content: 'Content for the second item.' }],
       bgColor: '#f3f4f6', titleColor: '#1f2937', textColor: '#374151', borderColor: '#d1d5db', contentBgColor: '#ffffff',
       borderThickness: 'medium', borderRadius: 'medium'
     },
     Alerts: {
-      message: '¡Atención! Este es un mensaje informativo.',
+      message: 'Attention! This is an informational message.',
       bgColor: '#3b82f6', textColor: '#ffffff', borderColor: '#2563eb',
       borderThickness: 'medium', borderRadius: 'medium'
     },
     Buttons: {
-      text: 'Mi Botón', link: '#', size: 'medium',
+      text: 'My Button', link: '#', size: 'medium',
       bgColor: '#4f46e5', textColor: '#ffffff', borderColor: '#4338ca',
       borderThickness: 'medium', borderRadius: 'medium'
     },
     ButtonGroup: {
-      buttons: [{ text: 'Opción A', link: '#' }, { text: 'Opción B', link: '#' }],
+      buttons: [{ text: 'Option A', link: '#' }, { text: 'Option B', link: '#' }],
       bgColor: '#6b7280', textColor: '#ffffff', borderColor: '#4b5563',
       borderThickness: 'medium', borderRadius: 'medium'
     },
     Card: {
-      title: 'Título de la Tarjeta', text: 'Descripción breve de la tarjeta.', imageSrc: 'https://placehold.co/400x200/e0e0e0/000000?text=Imagen', link: '#', linkText: 'Ver Detalles',
+      title: 'Card Title', text: 'A brief description for the card.', imageSrc: 'https://placehold.co/400x200/e0e0e0/000000?text=Image', link: '#', linkText: 'View Details',
       bgColor: '#ffffff', titleColor: '#1e293b', textColor: '#475569', linkColor: '#3b82f6', borderColor: '#e2e8f0',
       borderThickness: 'thin', borderRadius: 'large'
     },
     CardCollection: {
-      cards: [{ title: 'Curso A', text: 'Desarrollo web.', imageSrc: 'https://placehold.co/400x200/a78bfa/ffffff?text=Web' }, { title: 'Curso B', text: 'Programación.', imageSrc: 'https://placehold.co/400x200/2dd4bf/ffffff?text=Program' }],
+      cards: [{ title: 'Course A', text: 'Web development.', imageSrc: 'https://placehold.co/400x200/a78bfa/ffffff?text=Web' }, { title: 'Course B', text: 'Programming.', imageSrc: 'https://placehold.co/400x200/2dd4bf/ffffff?text=Program' }],
       bgColor: '#ffffff', titleColor: '#1e293b', textColor: '#475569', linkColor: '#3b82f6', borderColor: '#e2e8f0',
       borderThickness: 'thin', borderRadius: 'large'
     },
     Collapse: {
-      title: 'Mostrar/Ocultar Contenido', content: 'Este texto se puede mostrar u ocultar.',
+      title: 'Show/Hide Content', content: 'This is the text that can be shown or hidden.',
       linkColor: '#3b82f6', bgColor: '#f8fafc', textColor: '#334155', borderColor: '#e2e8f0',
       borderThickness: 'thin', borderRadius: 'medium'
     },
     Dropdowns: {
-      title: 'Menú Principal', items: [{ text: 'Sección 1', link: '#' }, { text: 'Sección 2', link: '#' }],
+      title: 'Main Menu', items: [{ text: 'Section 1', link: '#' }, { text: 'Section 2', link: '#' }],
       bgColor: '#4f46e5', textColor: '#ffffff', borderColor: '#d1d5db', contentBgColor: '#ffffff', contentTextColor: '#374151',
       borderThickness: 'thin', borderRadius: 'medium'
     },
     ListGroup: {
-      items: [{ text: 'Tema 1', link: '#' }, { text: 'Tema 2', link: '#' }], flush: false,
+      items: [{ text: 'Topic 1', link: '#' }, { text: 'Topic 2', link: '#' }], flush: false,
       bgColor: '#ffffff', textColor: '#374151', borderColor: '#e5e7eb',
       borderThickness: 'thin', borderRadius: 'medium'
     },
     NavBar: {
-      brand: 'Nombre del Curso', items: [{ text: 'Módulos', link: '#' }, { text: 'Tareas', link: '#' }], alignment: 'left',
+      brand: 'Course Name', items: [{ text: 'Modules', link: '#' }, { text: 'Assignments', link: '#' }], alignment: 'left',
       bgColor: '#1f2937', textColor: '#ffffff', linkColor: '#93c5fd',
       borderThickness: 'none', borderRadius: 'none'
     },
     HeroBanners: {
-      title: 'Bienvenido al Semestre', subtitle: '¡Explora y aprende!', buttonText: 'Ver Agenda', buttonLink: '#', imageSrc: 'https://placehold.co/1200x400/334155/ffffff?text=Banner', overlayColor: '#000000', overlayOpacity: 0.5,
+      title: 'Welcome to the Semester', subtitle: 'Explore and learn!', buttonText: 'View Schedule', buttonLink: '#', imageSrc: 'https://placehold.co/1200x400/334155/ffffff?text=Banner', overlayColor: '#000000', overlayOpacity: 0.5,
       titleColor: '#ffffff', textColor: '#e5e7eb', buttonBgColor: '#4f46e5', buttonTextColor: '#ffffff',
       borderThickness: 'none', borderRadius: 'none'
     },
@@ -760,12 +760,12 @@ function App() {
       borderThickness: 'none', borderRadius: 'full'
     },
     Breadcrumbs: {
-      items: [{ text: 'Inicio', link: '#' }, { text: 'Cursos', link: '#' }],
+      items: [{ text: 'Home', link: '#' }, { text: 'Courses', link: '#' }],
       textColor: '#4b5563', linkColor: '#3b82f6', separatorColor: '#d1d5db',
       borderThickness: 'none', borderRadius: 'none'
     },
     Badges: {
-      text: 'Nuevo', bgColor: '#22c55e', textColor: '#ffffff',
+      text: 'New', bgColor: '#22c55e', textColor: '#ffffff',
       borderThickness: 'none', borderRadius: 'full'
     },
   });
@@ -804,9 +804,9 @@ function App() {
   const handleAddItem = useCallback((itemType) => {
     setComponentProps(p => {
         const currentItems = p[selectedComponent][itemType];
-        let newItem = { text: 'Nuevo', link: '#' };
-        if (itemType === 'cards') newItem = { ...newItem, title: 'Nueva Tarjeta', imageSrc: 'https://placehold.co/400x200/cccccc/000000?text=Nueva' };
-        if (itemType === 'accordions') newItem = { ...newItem, title: `Nuevo Acordeón`, content: `Contenido nuevo.` };
+        let newItem = { text: 'New', link: '#' };
+        if (itemType === 'cards') newItem = { ...newItem, title: 'New Card', imageSrc: 'https://placehold.co/400x200/cccccc/000000?text=New' };
+        if (itemType === 'accordions') newItem = { ...newItem, title: `New Accordion`, content: `New content.` };
         return { ...p, [selectedComponent]: { ...p[selectedComponent], [itemType]: [...currentItems, newItem] }};
     });
   }, [selectedComponent]);
@@ -844,20 +844,20 @@ function App() {
 
         let formContent;
         switch (componentName) {
-            case 'Accordion': formContent = <> {C("bgColor", "Fondo de Título")} {C("titleColor", "Color de Título")} {C("contentBgColor", "Fondo de Contenido")} {C("textColor", "Color de Texto")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("accordions", { title: 'text', content: 'text' })} </>; break;
+            case 'Accordion': formContent = <> {C("bgColor", "Title Background")} {C("titleColor", "Title Color")} {C("contentBgColor", "Content Background")} {C("textColor", "Text Color")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("accordions", { title: 'text', content: 'text' })} </>; break;
             case 'Alerts': formContent = <> {T("message")} {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
-            case 'Buttons': formContent = <> {I("text", "Texto del Botón")} {I("link")} {S("size", null, ['small', 'medium', 'large'])} {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
+            case 'Buttons': formContent = <> {I("text", "Button Text")} {I("link")} {S("size", null, ['small', 'medium', 'large'])} {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
             case 'ButtonGroup': formContent = <> {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("buttons", { text: 'text', link: 'text' })} </>; break;
-            case 'Card': formContent = <> {I("title")} {T("text")} {I("imageSrc", "URL de Imagen")} {I("link")} {I("linkText")} {C("bgColor")} {C("titleColor")} {C("textColor")} {C("linkColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
-            case 'CardCollection': formContent = <> {C("bgColor", "Fondo de Tarjeta")} {C("titleColor", "Color de Título")} {C("textColor", "Color de Texto")} {C("linkColor", "Color de Enlace")} {C("borderColor", "Color de Borde")} {BT("borderThickness")} {BR("borderRadius")} {IL("cards", { title: 'text', text: 'text', imageSrc: 'text', link: 'text', linkText: 'text' })} </>; break;
-            case 'Collapse': formContent = <> {I("title", "Texto del Activador")} {T("content", "Contenido Oculto")} {C("linkColor")} {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
-            case 'Dropdowns': formContent = <> {I("title")} {C("bgColor", "Fondo del Botón")} {C("textColor", "Texto del Botón")} {C("contentBgColor", "Fondo del Menú")} {C("contentTextColor", "Texto del Menú")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
-            case 'ListGroup': formContent = <> <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.flush} onChange={e => onPropChange('flush', e.target.checked)} /><span className="ml-2">Sin bordes (flush)</span></label></div> {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
-            case 'NavBar': formContent = <> {I("brand")} {S("alignment", null, ['left', 'center', 'right'])} {C("bgColor")} {C("textColor", "Color de Marca")} {C("linkColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} {IL("items", { text: 'text', link: 'text' })} </>; break;
+            case 'Card': formContent = <> {I("title")} {T("text")} {I("imageSrc", "Image URL")} {I("link")} {I("linkText")} {C("bgColor")} {C("titleColor")} {C("textColor")} {C("linkColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
+            case 'CardCollection': formContent = <> {C("bgColor", "Card Background")} {C("titleColor", "Title Color")} {C("textColor", "Text Color")} {C("linkColor", "Link Color")} {C("borderColor", "Border Color")} {BT("borderThickness")} {BR("borderRadius")} {IL("cards", { title: 'text', text: 'text', imageSrc: 'text', link: 'text', linkText: 'text' })} </>; break;
+            case 'Collapse': formContent = <> {I("title", "Trigger Text")} {T("content", "Collapsible Content")} {C("linkColor")} {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} </>; break;
+            case 'Dropdowns': formContent = <> {I("title")} {C("bgColor", "Button Background")} {C("textColor", "Button Text")} {C("contentBgColor", "Menu Background")} {C("contentTextColor", "Menu Text")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
+            case 'ListGroup': formContent = <> <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.flush} onChange={e => onPropChange('flush', e.target.checked)} /><span className="ml-2">Flush (no borders)</span></label></div> {C("bgColor")} {C("textColor")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("items", { text: 'text', link: 'text' })} </>; break;
+            case 'NavBar': formContent = <> {I("brand")} {S("alignment", null, ['left', 'center', 'right'])} {C("bgColor")} {C("textColor", "Brand Color")} {C("linkColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} {IL("items", { text: 'text', link: 'text' })} </>; break;
             case 'HeroBanners': formContent = <> {I("title")} {T("subtitle")} {I("buttonText")} {I("buttonLink")} {I("imageSrc")} {C("overlayColor")} {I("overlayOpacity", null, "number")} {C("titleColor")} {C("textColor")} {C("buttonBgColor")} {C("buttonTextColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
-            case 'Pagination': formContent = <> {I("currentPageIndex", "Índice Página Activa", "number")} {C("bgColor", "Fondo")} {C("textColor", "Texto (Nav)")} {C("linkColor")} {C("activeBgColor", "Fondo Activo")} {C("activeTextColor", "Texto Activo")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("pages", { text: 'text', link: 'text' })} </>; break;
-            case 'Progress': formContent = <> {I("percentage", null, "number")} <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.showText} onChange={e => onPropChange('showText', e.target.checked)} /><span className="ml-2">Mostrar texto</span></label></div> {C("bgColor", "Color de Barra")} {C("containerBgColor", "Fondo de Contenedor")} {C("textColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
-            case 'Breadcrumbs': formContent = <> {C("textColor", "Texto (Actual)")} {C("linkColor")} {C("separatorColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} {IL("items", { text: 'text', link: 'text' })} </>; break;
+            case 'Pagination': formContent = <> {I("currentPageIndex", "Active Page Index", "number")} {C("bgColor", "Background")} {C("textColor", "Nav Text")} {C("linkColor")} {C("activeBgColor", "Active Background")} {C("activeTextColor", "Active Text")} {C("borderColor")} {BT('borderThickness')} {BR('borderRadius')} {IL("pages", { text: 'text', link: 'text' })} </>; break;
+            case 'Progress': formContent = <> {I("percentage", null, "number")} <div className="mb-4"><label className="inline-flex items-center"><input type="checkbox" checked={props.showText} onChange={e => onPropChange('showText', e.target.checked)} /><span className="ml-2">Show text</span></label></div> {C("bgColor", "Bar Color")} {C("containerBgColor", "Container Background")} {C("textColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
+            case 'Breadcrumbs': formContent = <> {C("textColor", "Current Text")} {C("linkColor")} {C("separatorColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} {IL("items", { text: 'text', link: 'text' })} </>; break;
             case 'Badges': formContent = <> {I("text")} {C("bgColor")} {C("textColor")} {hasBorder && <> {BT('borderThickness')} {BR('borderRadius')} </>} </>; break;
             default: formContent = null;
         }
@@ -873,7 +873,7 @@ function App() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100" style={{ fontFamily: 'Inter, sans-serif' }}>
       <aside className="w-full md:w-64 bg-white p-6 shadow-lg overflow-y-auto flex-shrink-0 border-r border-gray-200">
-        <h2 className="text-xl font-bold mb-6 text-gray-800">Componentes</h2>
+        <h2 className="text-xl font-bold mb-6 text-gray-800">Components</h2>
         <ul className="space-y-1">
           {componentList.map((component) => (
             <li key={component}>
@@ -889,29 +889,29 @@ function App() {
       </aside>
 
       <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-        <h1 className="text-3xl font-extrabold mb-6 text-gray-900">Generador de Componentes para Canvas</h1>
+        <h1 className="text-3xl font-extrabold mb-6 text-gray-900">Canvas Component Generator</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <section className="p-6 bg-white rounded-xl shadow-xl border border-gray-200">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">
-                Personalizar: <span className="text-blue-600">{selectedComponent.replace(/([A-Z])/g, ' $1').trim()}</span>
+                Customize: <span className="text-blue-600">{selectedComponent.replace(/([A-Z])/g, ' $1').trim()}</span>
               </h2>
               {customizationForms}
             </section>
 
             <div className="space-y-8">
                 <section className="p-6 bg-white rounded-xl shadow-xl border border-gray-200">
-                  <h2 className="text-2xl font-bold mb-4 text-gray-800">Previsualización</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-gray-800">Preview</h2>
                   <div className="border border-dashed border-gray-300 p-4 rounded-md bg-gray-50" dangerouslySetInnerHTML={{ __html: generatedHtml }} />
                 </section>
 
                 <section className="p-6 bg-gray-800 rounded-xl shadow-xl">
-                  <h2 className="text-2xl font-bold mb-4 text-white">HTML Generado</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-white">Generated HTML</h2>
                   <div className="bg-gray-900 text-green-300 p-4 rounded-md overflow-x-auto text-sm font-mono whitespace-pre-wrap break-all">
                     {generatedHtml}
                   </div>
                   <button onClick={handleCopy} className="mt-4 w-full px-6 py-3 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg">
-                    {showCopyMessage ? '¡Copiado!' : 'Copiar HTML al Portapapeles'}
+                    {showCopyMessage ? 'Copied!' : 'Copy HTML to Clipboard'}
                   </button>
                 </section>
             </div>
