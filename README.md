@@ -1,72 +1,75 @@
-# Canvas Component Generator
+# Generador de Componentes de Canvas
 
-This project is built with React and Tailwind CSS and serves as a visual UI component generator. It allows users to visually customize elements like buttons, cards, alerts, and more, and then get the corresponding HTML with inline styles, ready to be copied and pasted into any platform that supports HTML, such as a Learning Management System (LMS) or a CMS.
+Este proyecto, construido con React y Tailwind CSS, funciona como un generador visual de componentes de interfaz de usuario. Permite a los usuarios personalizar visualmente elementos como botones, tarjetas, alertas y más. Una vez personalizados, se puede obtener el código HTML correspondiente con estilos en línea, listo para copiar y pegar en cualquier plataforma que admita HTML, como un Sistema de Gestión del Aprendizaje (LMS) o un CMS.
 
-**[View Live Demo](https://pablogguizar.github.io/canvas-component-generator/)**
-
-![Image of the Component Generator in action](https://i.imgur.com/8a1b6Gk.png)
+**[Ver demostración en vivo](https://pablogguizar.github.io/canvas-component-generator/)**
 
 ---
 
-## ✨ Features
+## ✨ Características
 
-- **Intuitive Interface:** Visually customize components without needing to write code.
-- **Real-Time Preview:** See what your components look like as you edit them.
-- **HTML Code Generation:** Get clean HTML with inline styles, ready to use.
-- **Wide Variety of Components:**
-    - Accordions
-    - Alerts
-    - Badges
-    - Navbars
-    - Progress Bars
-    - Buttons & Button Groups
-    - Breadcrumbs
-    - Collapsible Content
-    - Dropdowns
-    - Hero Banners
-    - List Groups
-    - Pagination
-    - Cards & Card Collections
+-   **Interfaz intuitiva:** Personaliza componentes visualmente sin necesidad de escribir código.
+-   **Vista previa en tiempo real:** Observa cómo se ven tus componentes mientras los editas.
+-   **Generación de código HTML:** Obtén HTML limpio con estilos en línea, listo para usar.
+-   **Amplia variedad de componentes:**
+    -   Acordeones
+    -   Alertas
+    -   Insignias
+    -   Barras de Navegación
+    -   Barras de Progreso
+    -   Botones y Grupos de Botones
+    -   Migas de Pan
+    -   Contenido Colapsable
+    -   Menús Desplegables
+    -   Banners Hero (Hero Banners)
+    -   Grupos de Listas
+    -   Paginación
+    -   Tarjetas y Colecciones de Tarjetas
 
-## 🛠️ Tech Stack
+## 🛠️ Pila Tecnológica
 
-- **[React](https://reactjs.org/):** The core library for building the user interface.
-- **[Tailwind CSS](https://tailwindcss.com/):** A utility-first CSS framework for rapid and modern design.
-- **[gh-pages](https://www.npmjs.com/package/gh-pages):** A package to simplify deployment to GitHub Pages.
+-   **[React](https://reactjs.org/):** La librería principal para construir la interfaz de usuario.
+-   **[Tailwind CSS](https://tailwindcss.com/):** Un framework CSS utilitario para un diseño rápido y moderno.
+-   **[gh-pages](https://www.npmjs.com/package/gh-pages):** Un paquete para simplificar el despliegue en GitHub Pages.
 
 ---
 
-## 🚀 How to Run the Project Locally
+## 🚀 Cómo Ejecutar el Proyecto Localmente
 
-If you want to run this project on your own machine, follow these simple steps.
+Si deseas ejecutar este proyecto en tu propia máquina, sigue estos sencillos pasos:
 
-1.  **Clone the repository:**
+1.  **Clonar el repositorio:**
     ```bash
     git clone [https://github.com/PabloGGuizar/canvas-component-generator.git](https://github.com/PabloGGuizar/canvas-component-generator.git)
     ```
 
-2.  **Navigate to the project directory:**
+2.  **Navegar al directorio del proyecto:**
     ```bash
     cd canvas-component-generator
     ```
 
-3.  **Install dependencies:**
-    This will download React and all the necessary libraries.
+3.  **Instalar dependencias:**
+    Esto descargará React y todas las librerías necesarias.
     ```bash
     npm install
     ```
 
-4.  **Start the development server:**
-    The application will automatically open at `http://localhost:3000`.
+4.  **Iniciar el servidor de desarrollo:**
+    La aplicación se abrirá automáticamente en `http://localhost:3000`.
     ```bash
     npm start
     ```
 
 ---
 
-## 📦 Deployment
+## 📦 Despliegue
 
-This project is easily deployed to GitHub Pages using the following command, which creates a production build and publishes it to the `gh-pages` branch.
+Este proyecto se despliega fácilmente en GitHub Pages usando el siguiente comando, que crea una versión de producción y la publica en la rama `gh-pages`.
 
 ```bash
 npm run deploy
+```
+---
+
+Este trabajo está bajo una [Licencia Creative Commons Atribución 4.0 Internacional](http://creativecommons.org/licenses/by/4.0/).
+Aplicación realizada por [Pablo G. Guízar](https://pablogguizar.github.io/canvas-component-generator/) con la invaluable ayuda de Gemini.
