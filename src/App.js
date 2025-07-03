@@ -916,6 +916,11 @@ function App() {
                 </section>
             </div>
         </div>
+        <footer className="mt-8 text-center text-gray-600 text-sm">
+          Este trabajo está bajo una <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Licencia Creative Commons Atribución 4.0 Internacional</a>.
+          <br />
+          Aplicación realizada por <a href="https://github.com/PabloGGuizar/canvas-component-generator" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Pablo G. Guízar</a> con la invaluable ayuda de Gemini.
+        </footer>
       </main>
     </div>
   );
